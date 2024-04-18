@@ -24,4 +24,4 @@ def randomprimenum(bit_length):
 #bit_length = int(input("Enter the bit length: "))
 bit_length=8
 randomprime = randomprimenum(bit_length)
-print("random prime of bit length ",bit_length, "is: ", randomprime)
+

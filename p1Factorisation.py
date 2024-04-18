@@ -1,7 +1,8 @@
 import math
+from primenumbergeneration import randomprimenum
 
-p = 11
-q = 17
+p = randomprimenum(8)
+q = randomprimenum(8)
 n = p * q
 eul_phi = (p - 1) * (q - 1)
 
@@ -29,6 +30,7 @@ publickey = (n, e)
 privatekey = (n, d)
 
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
+print("p is: ", p, "\nq is: ",q)
 
 message= 112
 C = pow(message, e, n)
