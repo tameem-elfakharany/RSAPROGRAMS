@@ -3,6 +3,9 @@ from primenumbergeneration import randomprimenum
 
 p = randomprimenum(8)
 q = randomprimenum(8)
+while p==q:
+    q=randomprimenum(8)
+
 n = p * q
 eul_phi = (p - 1) * (q - 1)
 
@@ -43,10 +46,16 @@ privatekey = (n, d)
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
 
+#factorise n to obtain p and q 
+factors=prime_factorization(n)
+factorisedp=factors[1]
+factorisedq=factors[0]
+
 message= 112
 C = pow(message, e, n)
 M = pow(C, d, n)
 print("Encrypted Message : ", C, "\nDecrypted Message : ", M)
+print(f"factorised p and q from modulus of n are: {factorisedp},{factorisedq}")
 
 
 
