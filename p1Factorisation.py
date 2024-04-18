@@ -25,6 +25,17 @@ while True:
 
 gcd, d, _ = extended_GCD(e, eul_phi)
 
+def prime_factorization(n):
+    """Factorize a prime number into its prime factors."""
+    factors = []
+    for divisor in range(2, int(n**0.5) + 1):
+        while n % divisor == 0:
+            factors.append(divisor)
+            n //= divisor
+    if n > 1:
+        factors.append(n)
+    return factors
+
 # Use tuples to represent keys
 publickey = (n, e)
 privatekey = (n, d)
