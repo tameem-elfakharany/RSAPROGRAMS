@@ -1,30 +1,43 @@
 import math
+import time 
 from primenumbergeneration import randomprimenum
 
+#start time 
+starttime=time.time()
+
+#p and q random number generation
 p = randomprimenum(8)
 q = randomprimenum(8)
 
+while p==q:
+    """making sure they're not equal"""
+    q=randomprimenum(8)
+
+#calculations
 n = p * q
 eul_phi = (p - 1) * (q - 1)
+e = 3
+message= 112
+C = pow(message, e, n)
 
-def extended_GCD(a, b):
-    x0, x1, y0, y1 = 1, 0, 0, 1
-    while b:
-        q, a, b = a // b, b, a % b
-        x0, x1 = x1, x0 - q * x1
-        y0, y1 = y1, y0 - q * y1
-    return a, x0, y0
+# #Extended GCD
+# def extended_GCD(a, b):
+#     x0, x1, y0, y1 = 1, 0, 0, 1
+#     while b:
+#         q, a, b = a // b, b, a % b
+#         x0, x1 = x1, x0 - q * x1
+#         y0, y1 = y1, y0 - q * y1
+#     return a, x0, y0
 
 # Find a suitable e that is coprime with phi(n)
-e = 3
-while True:
-    gcd, _, _ = extended_GCD(e, eul_phi)
-    if gcd == 1:
-        break
-    else:
-        e += 1
+# while True:
+#     gcd, _, _ = extended_GCD(e, eul_phi)
+#     if gcd == 1:
+#         break
+#     else:
+#         e += 1
 
-gcd, d, _ = extended_GCD(e, eul_phi)
+# gcd, d, _ = extended_GCD(e, eul_phi)
 
 # Use tuples to represent keys
 publickey = (n, e)
@@ -33,7 +46,6 @@ privatekey = (n, d)
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
 
-message= 112
-C = pow(message, e, n)
+
 M = pow(C, d, n)
 print("Encrypted Message : ", C, "\nDecrypted Message : ", M)

@@ -1,14 +1,25 @@
 import math
+import time
 from primenumbergeneration import randomprimenum
 
-p = randomprimenum(8)
-q = randomprimenum(8)
-while p==q:
-    q=randomprimenum(8)
 
+#start time 
+starttime=time.time()
+
+#p and q random number generation
+p = randomprimenum(16)
+q = randomprimenum(16)
+
+
+while p==q:
+    """making sure they're not equal"""
+    q=randomprimenum(16)
+
+#calculations
 n = p * q
 eul_phi = (p - 1) * (q - 1)
 
+#Extended GCD
 def extended_GCD(a, b):
     x0, x1, y0, y1 = 1, 0, 0, 1
     while b:
@@ -26,11 +37,20 @@ while True:
     else:
         e += 1
 
+#getting d and ensuring its positive
 gcd, d, _ = extended_GCD(e, eul_phi)
 
+def ensure_positive_d(d, phi_n):
+    """Ensure that the private exponent d is positive."""
+    while d < 0:
+        d += phi_n
+    return d
+
+d = ensure_positive_d(d, eul_phi)
+
+factors = []
 def prime_factorization(n):
     """Factorize a prime number into its prime factors."""
-    factors = []
     for divisor in range(2, int(n**0.5) + 1):
         while n % divisor == 0:
             factors.append(divisor)
@@ -41,21 +61,33 @@ def prime_factorization(n):
 
 # Use tuples to represent keys
 publickey = (n, e)
-privatekey = (n, d)
+privatekey = (d, e)
 
+#obtaining p and q from n by factorisation
+factors=prime_factorization(n)
+p_factorised_from_n=factors[1]
+q_factorised_from_n=factors[0]
+
+#calculating time
+endtime=time.time()
+time=(endtime-starttime) *1000
+
+#message encryption (C) and decryption (M)
+message= 11
+C = pow(message, e, n)
+M = pow(C, d, n)
+
+#printing keys and generated p and q 
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
 
-#factorise n to obtain p and q 
-factors=prime_factorization(n)
-factorisedp=factors[1]
-factorisedq=factors[0]
-
-message= 112
-C = pow(message, e, n)
-M = pow(C, d, n)
+#printing encryption and decryption and factorised values
 print("Encrypted Message : ", C, "\nDecrypted Message : ", M)
-print(f"factorised p and q from modulus of n are: {factorisedp},{factorisedq}")
+print(f"factorised p and q from modulus of n are: {p_factorised_from_n},{q_factorised_from_n}")
+
+# printing time
+print("time in milliseconds is: ", time)
+
 
 
 

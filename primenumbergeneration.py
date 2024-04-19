@@ -22,6 +22,6 @@ def randomprimenum(bit_length):
             return number
 
 #bit_length = int(input("Enter the bit length: "))
-bit_length=8
-randomprime = randomprimenum(bit_length)
-
+p=randomprimenum(8)
+q=randomprimenum(8)
+print("p is: ", p,"\nq is: ",q)
