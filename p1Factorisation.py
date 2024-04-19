@@ -3,18 +3,21 @@ import time
 from primenumbergeneration import randomprimenum
 
 
-#start time 
-starttime=time.time()
+
 
 #p and q random number generation
-p = randomprimenum(16)
-q = randomprimenum(16)
+p = randomprimenum(8)
+q = randomprimenum(8)
+# p=int(input("enter a prime number for p"))
+# q=int(input('enter a prime number for q'))
 
 
 while p==q:
     """making sure they're not equal"""
-    q=randomprimenum(16)
+    q=randomprimenum(8)
 
+#start time 
+starttime=time.time()
 #calculations
 n = p * q
 eul_phi = (p - 1) * (q - 1)
@@ -29,7 +32,7 @@ def extended_GCD(a, b):
     return a, x0, y0
 
 # Find a suitable e that is coprime with phi(n)
-e = 3
+e = 365537
 while True:
     gcd, _, _ = extended_GCD(e, eul_phi)
     if gcd == 1:
@@ -61,7 +64,7 @@ def prime_factorization(n):
 
 # Use tuples to represent keys
 publickey = (n, e)
-privatekey = (d, e)
+privatekey = (n, d)
 
 #obtaining p and q from n by factorisation
 factors=prime_factorization(n)

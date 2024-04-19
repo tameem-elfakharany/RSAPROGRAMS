@@ -2,8 +2,7 @@ import math
 import time 
 from primenumbergeneration import randomprimenum
 
-#start time 
-starttime=time.time()
+
 
 #p and q random number generation
 p = randomprimenum(8)
@@ -13,39 +12,48 @@ while p==q:
     """making sure they're not equal"""
     q=randomprimenum(8)
 
+# p=int(input("enter a prime number for p"))
+# q=int(input('enter a prime number for q'))
+
+#start time 
+starttime=time.time()
 #calculations
 n = p * q
 eul_phi = (p - 1) * (q - 1)
-e = 3
+e = 65537
 message= 112
 C = pow(message, e, n)
 
-# #Extended GCD
-# def extended_GCD(a, b):
-#     x0, x1, y0, y1 = 1, 0, 0, 1
-#     while b:
-#         q, a, b = a // b, b, a % b
-#         x0, x1 = x1, x0 - q * x1
-#         y0, y1 = y1, y0 - q * y1
-#     return a, x0, y0
+def brute_force_decryption(C,n,e):
+    attempts=0
+    d=1
+    while True:
+        M=pow(C,d,n)
+        if M==message:
+            break
+        d+=1
+        attempts+=1
+    return d, attempts
 
-# Find a suitable e that is coprime with phi(n)
-# while True:
-#     gcd, _, _ = extended_GCD(e, eul_phi)
-#     if gcd == 1:
-#         break
-#     else:
-#         e += 1
+d,attempts=brute_force_decryption(C,n,e)
+def ensure_positive_d(d, phi_n):
+    """Ensure that the private exponent d is positive."""
+    while d < 0:
+        d += phi_n
+    return d
 
-# gcd, d, _ = extended_GCD(e, eul_phi)
+d = ensure_positive_d(d, eul_phi)
+M=pow(C,d,n)
 
 # Use tuples to represent keys
 publickey = (n, e)
 privatekey = (n, d)
+endtime=time.time()
+time=(endtime-starttime)*1000
 
+print("d (private exponent) is: ", d)
+print("number of attempts is: ", attempts)
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
-
-
-M = pow(C, d, n)
+print("time taken in milliseconds is: ", time)
 print("Encrypted Message : ", C, "\nDecrypted Message : ", M)
