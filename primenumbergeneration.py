@@ -22,8 +22,8 @@ def randomprimenum(bit_length):
             return number
 
 # #bit_length = int(input("Enter the bit length: "))
-p=randomprimenum(8)
-q=randomprimenum(8)
+p=randomprimenum(16)
+q=randomprimenum(16)
 # n=p*q
 # eul_phi=(p-1)*(q-1)
 # e=65537

@@ -5,15 +5,14 @@ from primenumbergeneration import randomprimenum
 
 
 #p and q random number generation
-# p = randomprimenum(16)
-# q = randomprimenum(16)
+p = randomprimenum(16)
+q = randomprimenum(16)
 
-# while p==q:
-#     """making sure they're not equal"""
-#     q=randomprimenum(16 )
+while p==q:
+    """making sure they're not equal"""
+    q=randomprimenum(16)
 
-p=223
-q=47
+
 
 #start time 
 starttime=time.time()
