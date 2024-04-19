@@ -5,15 +5,15 @@ from primenumbergeneration import randomprimenum
 
 
 #p and q random number generation
-p = randomprimenum(8)
-q = randomprimenum(8)
+# p = randomprimenum(16)
+# q = randomprimenum(16)
 
-while p==q:
-    """making sure they're not equal"""
-    q=randomprimenum(8)
+# while p==q:
+#     """making sure they're not equal"""
+#     q=randomprimenum(16 )
 
-# p=int(input("enter a prime number for p"))
-# q=int(input('enter a prime number for q'))
+p=223
+q=47
 
 #start time 
 starttime=time.time()
@@ -50,7 +50,7 @@ publickey = (n, e)
 privatekey = (n, d)
 endtime=time.time()
 time=(endtime-starttime)*1000
-
+print("Brute force result is: ")
 print("d (private exponent) is: ", d)
 print("number of attempts is: ", attempts)
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)

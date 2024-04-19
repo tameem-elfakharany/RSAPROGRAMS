@@ -6,15 +6,15 @@ from primenumbergeneration import randomprimenum
 
 
 #p and q random number generation
-p = randomprimenum(8)
-q = randomprimenum(8)
-# p=int(input("enter a prime number for p"))
-# q=int(input('enter a prime number for q'))
+# p = randomprimenum(16)
+# q = randomprimenum(16)
+p=223
+q=47
 
 
-while p==q:
-    """making sure they're not equal"""
-    q=randomprimenum(8)
+# while p==q:
+#     """making sure they're not equal"""
+#     q=randomprimenum(16)
 
 #start time 
 starttime=time.time()
@@ -81,6 +81,7 @@ C = pow(message, e, n)
 M = pow(C, d, n)
 
 #printing keys and generated p and q 
+print("factorisation result is: ")
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
 
