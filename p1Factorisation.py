@@ -73,7 +73,8 @@ message= 11
 C = pow(message, e, n)
 M = pow(C, d, n)
 
-#printing keys and generated p and q 
+#printing keys and generated p and q
+print("factorisation: ") 
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
 print("n is: ", n, "\ne is: ", e, "\neuler: ", eul_phi)
