@@ -1,29 +1,21 @@
 import math
 import time
-from primenumbergeneration import randomprimenum
-
-
-
 
 #p and q random number generation
-# p = randomprimenum(16)
-# q = randomprimenum(16)
-p=43331
-q=13907
+p=int(input("enter p: "))
+q=int(input("enter q: "))
 
 
-# while p==q:
-#     """making sure they're not equal"""
-#     q=randomprimenum(16)
 
 #start time 
 starttime=time.time()
+
 #calculations
 n = p * q
 eul_phi = (p - 1) * (q - 1)
 
 #Extended GCD
-def extended_GCD(a, b):
+def extendedGCD(a, b):
     x0, x1, y0, y1 = 1, 0, 0, 1
     while b:
         q, a, b = a // b, b, a % b
@@ -34,14 +26,14 @@ def extended_GCD(a, b):
 # Find a suitable e that is coprime with phi(n)
 e = 365537
 while True:
-    gcd, _, _ = extended_GCD(e, eul_phi)
+    gcd, _, _ = extendedGCD(e, eul_phi)
     if gcd == 1:
         break
     else:
         e += 1
 
 #getting d and ensuring its positive
-gcd, d, _ = extended_GCD(e, eul_phi)
+gcd, d, _ = extendedGCD(e, eul_phi)
 
 def ensure_positive_d(d, phi_n):
     """Ensure that the private exponent d is positive."""
@@ -51,6 +43,7 @@ def ensure_positive_d(d, phi_n):
 
 d = ensure_positive_d(d, eul_phi)
 
+#getting p and q (factorisation)
 factors = []
 def prime_factorization(n):
     """Factorize a prime number into its prime factors."""
@@ -81,10 +74,9 @@ C = pow(message, e, n)
 M = pow(C, d, n)
 
 #printing keys and generated p and q 
-print("factorisation result is: ")
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
 print("p is: ", p, "\nq is: ",q)
-
+print("n is: ", n, "\ne is: ", e, "\neuler: ", eul_phi)
 #printing encryption and decryption and factorised values
 print("Encrypted Message : ", C, "\nDecrypted Message : ", M)
 print(f"factorised p and q from modulus of n are: {p_factorised_from_n},{q_factorised_from_n}")

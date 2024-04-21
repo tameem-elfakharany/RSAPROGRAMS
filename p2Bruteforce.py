@@ -5,24 +5,27 @@ from primenumbergeneration import randomprimenum
 
 
 #p and q random number generation
-p = randomprimenum(16)
-q = randomprimenum(16)
+p = randomprimenum(8)
+q = randomprimenum(8)
 
 while p==q:
     """making sure they're not equal"""
-    q=randomprimenum(16)
-
+    q=randomprimenum(8)
 
 
 #start time 
 starttime=time.time()
+
 #calculations
 n = p * q
 eul_phi = (p - 1) * (q - 1)
 e = 65537
-message= 112
+
+#encrypting
+message= 11
 C = pow(message, e, n)
 
+#finding d using brute force
 def brute_force_decryption(C,n,e):
     attempts=0
     d=1
@@ -35,6 +38,7 @@ def brute_force_decryption(C,n,e):
     return d, attempts
 
 d,attempts=brute_force_decryption(C,n,e)
+
 def ensure_positive_d(d, phi_n):
     """Ensure that the private exponent d is positive."""
     while d < 0:
@@ -47,12 +51,16 @@ M=pow(C,d,n)
 # Use tuples to represent keys
 publickey = (n, e)
 privatekey = (n, d)
+
+#calculating time
 endtime=time.time()
 time=(endtime-starttime)*1000
-print("Brute force result is: ")
+
+print("Brute force: ")
 print("d (private exponent) is: ", d)
-print("number of attempts is: ", attempts)
+print("Number of attempts is: ", attempts)
 print("Public Key : ", publickey, "\nPrivate Key :", privatekey)
-print("p is: ", p, "\nq is: ",q)
+print("P is: ", p, "\nq is: ",q)
+print("n is: ", n, "\ne is: ", e, "\neuler: ", eul_phi)
 print("time taken in milliseconds is: ", time)
 print("Encrypted Message : ", C, "\nDecrypted Message : ", M)
